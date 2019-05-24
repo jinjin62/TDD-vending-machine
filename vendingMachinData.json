@@ -1,0 +1,29 @@
+{
+  "inventory": {
+    "coke": {
+      "id": 0,
+      "price": 1,
+      "quantity": 10
+    },
+    "fanta": {
+      "id": 1,
+      "price": 2,
+      "quantity": 10
+    },
+    "sprite": {
+      "id": 2,
+      "price": 3,
+      "quantity": 10
+    },
+    "pepsi": {
+      "id": 3,
+      "price": 4,
+      "quantity": 10
+    },
+    "tea": {
+      "id": 4,
+      "price": 5,
+      "quantity": 10
+    }
+  }
+}
