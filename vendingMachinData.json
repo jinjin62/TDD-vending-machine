@@ -1,29 +1,37 @@
 {
-  "inventory": {
-    "coke": {
-      "id": 0,
-      "price": 1,
-      "quantity": 10
-    },
-    "fanta": {
-      "id": 1,
-      "price": 2,
-      "quantity": 10
-    },
-    "sprite": {
-      "id": 2,
-      "price": 3,
-      "quantity": 10
-    },
-    "pepsi": {
-      "id": 3,
-      "price": 4,
-      "quantity": 10
-    },
-    "tea": {
-      "id": 4,
-      "price": 5,
-      "quantity": 10
-    }
+  "a1": {
+    "item": "coke",
+    "price": 5.0,
+    "quantity": 10
+  },
+  "a2": {
+    "item": "pepsi",
+    "price": 4.5,
+    "quantity": 40
+  },
+  "a3": {
+    "item": "sprite",
+    "price": 6.0,
+    "quantity": 20
+  },
+  "a4": {
+    "item": "fanta",
+    "price": 10.0,
+    "quantity": 10
+  },
+  "b1": {
+    "item": "dr pepper",
+    "price": 2.0,
+    "quantity": 30
+  },
+  "b2": {
+    "item": "ice tea",
+    "price": 2.75,
+    "quantity": 10
+  },
+  "b3": {
+    "item": "diet coke",
+    "price": 0.5,
+    "quantity": 100
   }
 }
