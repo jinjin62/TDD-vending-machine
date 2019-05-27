@@ -68,6 +68,17 @@ class VendingMachine {
       return (this.coins[coin].quantity += quantity);
     }
   }
+  restockBulkInv(inv) {
+    if (!inv || typeof inv !== "number") {
+      throw new Error();
+    } else {
+      const quantityArr = [];
+      for (var stockCode in this.inv) {
+        quantityArr.push((this.inv[stockCode].quantity += inv));
+      }
+      return quantityArr;
+    }
+  }
   restockSingleItem({ item, quantity }) {
     return (this.inv[item].quantity += quantity);
   }

@@ -16,7 +16,6 @@ describe("VendingMachine", () => {
         vendingMachine.result = vendingMachine.subject.showInventory();
       });
       it("should give the inventory available", () => {
-        // expect(test.result.averageAge).toEqual(test.demographics.averageAge);
         expect(vendingMachine.result).toEqual(inv.inventory);
       });
     });
@@ -32,7 +31,7 @@ describe("VendingMachine", () => {
       });
     });
   });
-  describe("Restock single coin", () => {
+  describe("Restock coins", () => {
     describe("Restock singular coin, with valid input", () => {
       beforeEach(() => {
         vendingMachine.result = vendingMachine.subject.restockSingularCoin({
@@ -45,16 +44,23 @@ describe("VendingMachine", () => {
       });
     });
   });
-  describe("restock single item", () => {
-    describe("when vending machine inventory is empty", () => {
+
+  describe("Restocking inventory", () => {
+    describe("Given a valid input to be added to inventory stock", () => {
+      it("Should increment all inventory by specified amount and return the inventory", () => {
+        vendingMachine.result = vendingMachine.subject.restockBulkInv(20);
+        expect(vendingMachine.result).toEqual([30, 60, 40, 30, 50, 30, 120]);
+      });
+    });
+    describe("when given a single item to restock", () => {
       beforeEach(() => {
         vendingMachine.result = vendingMachine.subject.restockSingleItem({
           item: "a1",
           quantity: 10
         });
       });
-      it("should increase coin by given amount", () => {
-        expect(vendingMachine.result).toEqual(20);
+      it("should increase item quantity by given amount", () => {
+        expect(vendingMachine.result).toEqual(40);
       });
     });
   });
@@ -67,7 +73,7 @@ describe("VendingMachine", () => {
         });
       });
       it("should despense an item", () => {
-        expect(vendingMachine.result).toEqual(30);
+        expect(vendingMachine.result).toEqual(50);
       });
     });
   });
