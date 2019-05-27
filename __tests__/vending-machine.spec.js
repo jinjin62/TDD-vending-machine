@@ -74,16 +74,14 @@ describe("VendingMachine", () => {
   describe("Dispense change", () => {
     describe("Given either an invalid input, or the input (money) is not large enough to purchase desired item", () => {
       it("Should throw an error", () => {
-        const result = () => vendingMachine.dispenseChange(5, 2);
+        const result = () => vendingMachine.subject.dispenseChange(5, 2);
         expect(result).toThrow();
       });
     });
     describe("Given a valid input, where the money input is greater than the price of the item and the change is not a float", () => {
       it("should dispense the change", () => {
-        beforeEach(() => {
-          vendingMachine.result = vendingMachine.dispenseChange(5, 7);
-        });
-        expect(vendingMachine.result).toEqual({
+        const result = vendingMachine.subject.dispenseChange(5, 7);
+        expect(result).toEqual({
           toonie: 1,
           loonie: 0,
           quarter: 0,
