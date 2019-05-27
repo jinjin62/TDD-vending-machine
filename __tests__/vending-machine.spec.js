@@ -26,12 +26,19 @@ describe("VendingMachine", () => {
         vendingMachine.result = vendingMachine.subject.queryMoney();
       });
       it("should give the amount of money", () => {
-        // expect(test.result.averageAge).toEqual(test.demographics.averageAge);
         expect(vendingMachine.result).toEqual(vendingMachine.subject.quantity);
       });
     });
   });
   describe("Restock coins", () => {
+    describe("Restock bulk change with valid coins", () => {
+      describe("Given a valid input for change", () => {
+        it("Should increment the change inventory by specified amount", () => {
+          vendingMachine.result = vendingMachine.subject.restockBulkChange(10);
+          expect(vendingMachine.result).toEqual([30, 25, 20, 20, 25]);
+        });
+      });
+    });
     describe("Restock singular coin, with valid input", () => {
       beforeEach(() => {
         vendingMachine.result = vendingMachine.subject.restockSingularCoin({
@@ -39,8 +46,8 @@ describe("VendingMachine", () => {
           quantity: 11
         });
       });
-      it("Should increment the quantity of specified coin, by specified amount", () => {
-        expect(vendingMachine.result).toEqual(21);
+      it("Should increment the quantity of specified coin by a specified amount", () => {
+        expect(vendingMachine.result).toEqual(31);
       });
     });
   });
@@ -78,7 +85,7 @@ describe("VendingMachine", () => {
     });
   });
   describe("Dispense change", () => {
-    describe("Given either an invalid input, or the input (money) is not large enough to purchase desired item", () => {
+    describe("Given either an invalid input, or the input is not large enough to purchase desired item", () => {
       it("Should throw an error", () => {
         vendingMachine.result = () =>
           vendingMachine.subject.dispenseChange(5, 2);

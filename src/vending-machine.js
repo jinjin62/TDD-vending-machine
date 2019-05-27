@@ -61,6 +61,17 @@ class VendingMachine {
   queryMoney() {
     return this.coins.quantity;
   }
+  restockBulkChange(coins) {
+    if (!coins || typeof coins !== "number") {
+      throw new Error();
+    } else {
+      const coinQuantityArr = [];
+      for (var coinsName in this.coins) {
+        coinQuantityArr.push((this.coins[coinsName].quantity += coins));
+      }
+      return coinQuantityArr;
+    }
+  }
   restockSingularCoin({ coin, quantity }) {
     if (typeof coin !== "string" || typeof quantity !== "number") {
       throw new Error();
