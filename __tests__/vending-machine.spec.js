@@ -74,19 +74,40 @@ describe("VendingMachine", () => {
   describe("Dispense change", () => {
     describe("Given either an invalid input, or the input (money) is not large enough to purchase desired item", () => {
       it("Should throw an error", () => {
-        const result = () => vendingMachine.subject.dispenseChange(5, 2);
-        expect(result).toThrow();
+        vendingMachine.result = () =>
+          vendingMachine.subject.dispenseChange(5, 2);
+        expect(vendingMachine.result).toThrow();
       });
     });
     describe("Given a valid input, where the money input is greater than the price of the item and the change is not a float", () => {
-      it("should dispense the change", () => {
-        const result = vendingMachine.subject.dispenseChange(5, 7);
-        expect(result).toEqual({
+      it("should dispense the correct amount of change", () => {
+        vendingMachine.result = vendingMachine.subject.dispenseChange(5, 7);
+        expect(vendingMachine.result).toEqual({
           toonie: 1,
           loonie: 0,
           quarter: 0,
           dime: 0,
           nickel: 0
+        });
+      });
+    });
+  });
+  describe("Dispense item", () => {
+    describe("Given an invalid input (dollar amount), being an inadequate amount or something other than money", () => {
+      it("Should throw an error", () => {
+        vendingMachine.resultFail1 = () => vendingMachine.dispenseInvItem(5, 3);
+        vendingMachine.resultFail2 = () =>
+          vendingMachine.dispenseInvItem("hello");
+        expect(vendingMachine.resultFail1).toThrow();
+        expect(vendingMachine.resultFail2).toThrow();
+      });
+      describe("Given a valid input (dollar amount)", () => {
+        it("Should reduce the item stock by 1 and return the item as well as the change", () => {
+          vendingMachine.result = vendingMachine.subject.dispenseInvItem(
+            "a3",
+            10
+          );
+          expect(vendingMachine.result).toEqual(["sprite", 4]);
         });
       });
     });

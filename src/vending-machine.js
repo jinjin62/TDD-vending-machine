@@ -68,14 +68,27 @@ class VendingMachine {
       return (this.coins[coin].quantity += quantity);
     }
   }
-  //   restockAllCoins() {
-  //     return null;
-  //   }
   restockSingleItem({ item, quantity }) {
     return (this.inv[item].quantity += quantity);
   }
-  dispenseItem({ payment, quantity }) {
-    return (this.inv[item.quantity] -= quantity);
+  dispenseInvItem(item, dollarInput) {
+    const result = [];
+    const change = dollarInput - this.inv[item].price;
+    if (
+      typeof item !== "string" ||
+      typeof dollarInput !== "number" ||
+      this.inv[item] === undefined ||
+      this.inv[item].quantity < 1 ||
+      dollarInput < this.inv[item].price
+    ) {
+      throw new Error();
+    } else {
+      this.inv[item].quantity -= 1;
+      result.push(this.inv[item].item);
+      result.push(change);
+
+      return result;
+    }
   }
 }
 module.exports = VendingMachine;
