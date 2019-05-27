@@ -44,16 +44,51 @@ describe("VendingMachine", () => {
         expect(vendingMachine.result).toEqual(21);
       });
     });
-    describe("restock single item", () => {
-      describe("when vending machine inventory is empty", () => {
-        beforeEach(() => {
-          vendingMachine.result = vendingMachine.subject.restockSingleItem({
-            item: "coke",
-            quantity: 10
-          });
+  });
+  describe("restock single item", () => {
+    describe("when vending machine inventory is empty", () => {
+      beforeEach(() => {
+        vendingMachine.result = vendingMachine.subject.restockSingleItem({
+          item: "a1",
+          quantity: 10
         });
-        it("should increase coin by given amount", () => {
-          expect(vendingMachine.result).toEqual(20);
+      });
+      it("should increase coin by given amount", () => {
+        expect(vendingMachine.result).toEqual(20);
+      });
+    });
+  });
+  describe("Dispense a single item", () => {
+    describe("when money input is correct", () => {
+      beforeEach(() => {
+        vendingMachine.result = vendingMachine.subject.restockSingleItem({
+          item: "a1",
+          quantity: 10
+        });
+      });
+      it("should despense an item", () => {
+        expect(vendingMachine.result).toEqual(30);
+      });
+    });
+  });
+  describe("Dispense change", () => {
+    describe("Given either an invalid input, or the input (money) is not large enough to purchase desired item", () => {
+      it("Should throw an error", () => {
+        const result = () => vendingMachine.dispenseChange(5, 2);
+        expect(result).toThrow();
+      });
+    });
+    describe("Given a valid input, where the money input is greater than the price of the item and the change is not a float", () => {
+      it("should dispense the change", () => {
+        beforeEach(() => {
+          vendingMachine.result = vendingMachine.dispenseChange(5, 7);
+        });
+        expect(vendingMachine.result).toEqual({
+          toonie: 1,
+          loonie: 0,
+          quarter: 0,
+          dime: 0,
+          nickel: 0
         });
       });
     });
